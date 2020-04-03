@@ -6,41 +6,14 @@ from mininet.topo import SingleSwitchTopo
 
 from mininet.node import Host
 from functools import partial
-
-from flask import Flask
-app = Flask(__name__)
-
-
-# class SingleSwitchTopo(Topo):
-#     "Single switch connected to n hosts."
-#     def build(self, n=2):
-#         switch = self.addSwitch('s1')
-#         # Python's range(N) generates 0..N-1
-#         for h in range(n):
-#             host = self.addHost('h%s' % (h + 1))
-#             self.addLink(host, switch)
-#
-#
-# def simple_test():
-#     # "Create and test a simple network"
-#     topo = SingleSwitchTopo(n=2)
-#     net = Mininet(topo)
-#     net.start()
-#     dumping = "Dumping host connections"
-#     dumpNodeConnections(net.hosts)
-#     print('********************')
-#     print("Testing network connectivity")
-#     net.pingAll()
-#     # net.stop()
-#     return dumping
-#
-#
-# if __name__ == '__main__':
-#     # Tell mininet to print useful information
-#     setLogLevel('info')
-#     simple_test()
+from collections import namedtuple
 
 from mininet.topo import Topo
+from flask import Flask, request, render_template
+app = Flask(__name__)
+
+Host = namedtuple('Host', 'info')
+hosts = []
 
 class MyTopo( Topo ):
     "Simple topology example."
@@ -69,12 +42,11 @@ class MyTopo( Topo ):
 
 @app.route('/')
 def hello_world():
-    b = "string"
-    topos = MyTopo()
-    c = "++++++++++"
-    return topos.g.node
+    return render_template('start.html')
 
 
 @app.route('/create')
 def create():
-    return "Here'll be topos!"
+    topos = MyTopo()
+    hosts = topos.g.node
+    return render_template('create.html', hosts=hosts)
