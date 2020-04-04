@@ -14,6 +14,11 @@
     <button type="submit">Add switch</button>
 </form>
 
+<form method="post" action="/add_controller">
+    <button type="submit">Add controller</button>
+</form>
+
+
 <h3> Created hosts</h3>
 {% for host in hosts%}
 <div>{{ host }}</div>
@@ -22,6 +27,11 @@
 <h3> Created switches</h3>
 {% for switch in switches%}
 <div>{{ switch }}</div>
+{% endfor %}
+
+<h3> Created controllers</h3>
+{% for controller in controllers%}
+<div>{{ controller }}</div>
 {% endfor %}
 </body>
 </html>

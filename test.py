@@ -14,6 +14,7 @@ app = Flask(__name__)
 Host = namedtuple('Host', 'info')
 hosts = []
 switches = []
+controllers = []
 
 class MyTopo( Topo ):
 
@@ -43,7 +44,7 @@ def hello_world():
 def create():
     # topos = MyTopo()
     # hosts = topos.g.node
-    return render_template('create.html', hosts=hosts, switches=switches)
+    return render_template('create.html', hosts=hosts, switches=switches, controllers=controllers)
 
 
 @app.route('/add_host', methods=['POST'])
@@ -62,3 +63,14 @@ def add_switch():
     s = Switch(string, inNamespace=False)
     switches.append(s)
     return redirect(url_for('create'))
+
+
+@app.route('/add_controller', methods=['POST'])
+def add_controller():
+    num = len(controllers)
+    string = 'c' + str(num)
+    c = Controller(string, inNamespace=False)
+    controllers.append(c)
+    return redirect(url_for('create'))
+
+
