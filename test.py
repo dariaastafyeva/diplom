@@ -4,7 +4,7 @@ from mininet.log import setLogLevel
 from mininet.topo import SingleSwitchTopo
 
 from mininet.node import OVSSwitch
-from mininet.node import Host
+from mininet.node import Host, Controller, Switch
 from functools import partial
 from collections import namedtuple
 from mininet.topo import Topo
@@ -59,6 +59,6 @@ def add_host():
 def add_switch():
     num = len(switches)
     string = 's' + str(num)
-    s = OVSSwitch(string)
+    s = Switch(string, inNamespace=False)
     switches.append(s)
     return redirect(url_for('create'))
