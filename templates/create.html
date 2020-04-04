@@ -9,9 +9,19 @@
 <form method="post" action="/add_host">
     <button type="submit">Add host</button>
 </form>
-<h3> Created</h3>
+
+<form method="post" action="/add_switch">
+    <button type="submit">Add switch</button>
+</form>
+
+<h3> Created hosts</h3>
 {% for host in hosts%}
 <div>{{ host }}</div>
+{% endfor %}
+
+<h3> Created switches</h3>
+{% for switch in switches%}
+<div>{{ switch }}</div>
 {% endfor %}
 </body>
 </html>
