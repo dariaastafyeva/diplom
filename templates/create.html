@@ -6,6 +6,10 @@
 </head>
 <body>
 <h1>Text</h1>
+<form method="post" action="/create_net">
+    <button type="submit">Create net</button>
+</form>
+
 <form method="post" action="/add_host">
     <button type="submit">Add host</button>
 </form>
@@ -18,6 +22,24 @@
     <button type="submit">Add controller</button>
 </form>
 
+<form method="post" action="/add_link">
+    <button type="submit">Add link</button>
+</form>
+
+<form method="post" action="/form_topology">
+    <button type="submit">Form Topology</button>
+</form>
+
+<div>
+    <h2>Add Template</h2>
+    <form method="post" action="/add_topology">
+        <p>Hosts amount:</p>
+        <input type="text" id="input-host" name="input_host">
+        <p>Switches amount:</p>
+        <input type="text" id="input-switch" name="input_switch">
+        <button type="submit">Add topology</button>
+    </form>
+</div>
 
 <h3> Created hosts</h3>
 {% for host in hosts%}
@@ -33,5 +55,13 @@
 {% for controller in controllers%}
 <div>{{ controller }}</div>
 {% endfor %}
+
+<h3> Created links</h3>
+{% for link in links%}
+<div>{{ link }}</div>
+{% endfor %}
+
+<h3>Ping checked</h3>
+<div>{{ ping }}</div>
 </body>
 </html>
